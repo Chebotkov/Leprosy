@@ -31,11 +31,16 @@ namespace CSRemover
         {
             if (!String.IsNullOrEmpty(selectedPath))
             {
-                if (CSRemover.Additional_Classes.Remover.Remove(selectedPath))
+                Loading loading = new Loading();
+                this.Visibility = Visibility.Collapsed;
+                loading.ShowDialog();
+                /*if (CSRemover.Additional_Classes.Remover.Remove(selectedPath))
                 {
+
                     //Shutdown();
                 }
                 else System.Windows.MessageBox.Show("This path doesn't exists", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+    */        
             }
             else
             {

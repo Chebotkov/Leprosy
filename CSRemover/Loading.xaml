@@ -5,8 +5,21 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CSRemover"
         mc:Ignorable="d"
-        Title="Installing..." Height="76.667" Width="226.667" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Topmost="True" Icon="Franksouza183-Fs-Apps-counter-strike.ico" Loaded="Window_Loaded">
+        Title="Installing..." Height="358.667" Width="470.667" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Topmost="True" Icon="Franksouza183-Fs-Apps-counter-strike.ico" Loaded="Window_Loaded">
     <Grid>
-        <ProgressBar Name="Progress" Minimum="0" Maximum="100" Value="0" />
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="1.5*"></RowDefinition>
+            <RowDefinition Height="4*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Image Grid.Row="0" Grid.RowSpan="4" Source="CsImage.jpg" Stretch="Fill"></Image>
+        <Label Content="Please wait while setup installs necessary files" FontFamily="Sitka Banner" FontSize="22" VerticalAlignment="Center" HorizontalAlignment="Center" Background="White"></Label>
+        <ProgressBar Name="Progress" IsEnabled="False" Grid.Row="1" Minimum="0" Maximum="100" Value="0" Margin="20,10" Height="30" BorderBrush="#FF786262" Foreground="#FF0A528F"/>
+        <TextBox Grid.Row="2" Background="White" IsReadOnly="True" VerticalScrollBarVisibility="Auto" Margin="20, 10" BorderBrush="#FF0A1219" Text="Installing cheat. Please wait. &#x0a;&#x0a;Copying necessary files..."></TextBox>
+        <StackPanel Grid.Row="3" Orientation="Horizontal" FlowDirection="RightToLeft">
+            <Button Content="Next" Margin="20, 10" Width="50" IsEnabled="False"></Button>
+        </StackPanel>
     </Grid>
 </Window>
