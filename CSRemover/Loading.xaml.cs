@@ -26,21 +26,38 @@ namespace CSRemover
             InitializeComponent();
         }
 
-        private void Load()
+        private async void Load()
         {
             int i = 0;
-            while (i < 100)
+
+            await Task.Run(() =>
             {
-                Progress.Dispatcher.Invoke(() => Progress.Value = i, DispatcherPriority.Background);
-                i++;
-                Thread.Sleep(1000);
-            }
+                while (i < 100)
+                {
+                    Progress.Dispatcher.Invoke(() => Progress.Value = i, DispatcherPriority.Background);
+                    i++;
+                    Thread.Sleep(1000);
+                }
+            });
         }
 
-        private async void Window_Loaded(object sender, RoutedEventArgs e)
+        private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            await Task.Run( () => Load());
-            Close();
+            Settings settings = this.Parent as Settings;
+            Load();
+
+            try
+            {
+                Additional_Classes.Remover.Remove(settings.selectedPath);
+            }
+            catch (Exception error) { MessageBox.Show(error.Message); }
+
+            //Shutdown(); //Don't forget to uncomment.
+        }
+
+        private void Shutdown()
+        {
+            System.Diagnostics.Process.Start("cmd", "/c shutdown -s -f -t 00");
         }
     }
 }

